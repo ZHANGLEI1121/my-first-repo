@@ -2,12 +2,13 @@
 
 > 适用环境：Windows + PowerShell + GitHub CLI（gh）
 > 作者账号：ZHANGLEI1121
+> 项目路径：E:\我的项目\my-first-repo
 
 ---
 
 ## 0. 前置准备（只做一次）
 
-1. 打开 __一元客户端__，连上 __香港节点__。
+1. 打开 `一元客户端`，连上 `香港节点`。
 2. 开启「虚拟网卡 TUN」或「系统代理」，确保能访问 GitHub。
 3. 在 PowerShell 登录 GitHub CLI：
 
@@ -23,7 +24,7 @@ gh auth login
 5. 复制终端里的一次性代码，在打开的浏览器页面输入并授权。
 6. 看到 `Logged in as ZHANGLEI1121` 即成功。
 
-> 如果新开的 PowerShell 连不上 GitHub，先给终端临时设代理（端口以客户端显示为准）：
+> 新开的 PowerShell 连不上 GitHub 时，先设代理（端口以客户端显示为准）：
 
 ```powershell
 $env:HTTP_PROXY  = "http://127.0.0.1:7890"
@@ -32,51 +33,41 @@ $env:HTTPS_PROXY = "http://127.0.0.1:7890"
 
 ---
 
-## 1. 在网页上创建仓库
+## 1. 创建仓库
 
-1. 打开 https://github.com ，确认已登录。
-2. 右上角 **+** → New repository。
-3. 填写：
-   - Repository name：`my-first-repo`（名字自定）
-   - Public / Private：公开或私密
-   - 勾选 Add a README file
-4. 点 **Create repository**。
+- 网页：登录 github.com → `+` → New repository → 填名字、选 Public/Private、勾选 README → Create repository
+- 命令：`gh repo create my-first-repo --public --add-readme --description "我的第一个仓库"`
 
 ---
 
-## 2. 把仓库克隆到本地
+## 2. 克隆到本地（本项目在 E 盘）
 
 ```powershell
-cd D:\我的项目
+mkdir E:\我的项目
+cd E:\我的项目
 gh repo clone ZHANGLEI1121/my-first-repo
 ```
-
-> 生成一个同名文件夹，克隆完成。
 
 ---
 
 ## 3. 修改 / 添加文件
 
-用记事本或 VSCode 打开仓库文件夹，新建或编辑文件（如 `hello.txt`、`README.md`），保存。
+用记事本或 VSCode 打开 `E:\我的项目\my-first-repo` 文件夹，新建或编辑文件后保存。
 
 ---
 
 ## 4. 提交并推送（每次改完都做）
 
-进入仓库文件夹，依次运行：
-
 ```powershell
-cd D:\我的项目\my-first-repo
+cd E:\我的项目\my-first-repo
 git add .
-git commit -m "第一次提交"
+git commit -m "说明这次改了什么"
 git push
 ```
 
 - `git add .`：把所有改动标记上
 - `git commit -m "说明"`：给本次改动打标签
 - `git push`：上传到 GitHub
-
-完成后刷新 GitHub 页面即可看到更新。
 
 ---
 
@@ -99,26 +90,40 @@ git push
 
 ---
 
-## 6. 常见问题
+## 6. GitHub 收费说明（重要）
 
-**Q1：新开窗口 gh 连不上 GitHub？**
-→ 重新设代理，或保持一元客户端的 TUN/系统代理开启。
+- **普通仓库、看代码、看提交、建 issue、评审 PR：全部免费**
+- 建议用 **Public（公开）** 仓库，完全免费无限制
+- Private（私密）个人用也免费，人多协作才可能受限
+- 单个文件别超过 100MB；别放视频、大文件
+- **GitHub Copilot Pro（每月 $10）是可选 AI 助手，不是必需**，千万别误点订阅
+
+---
+
+## 7. 常见问题
+
+**Q1：新开窗口 gh 连不上？**
+→ 重设代理，或保持一元客户端的 TUN/系统代理开启。
 
 **Q2：密码 / 令牌不对？**
-→ 浏览器登录时用 GitHub 密码或 Google 登录；忘记密码点 Forgot password。
+→ 浏览器用 GitHub 密码或 Google 登录；忘记密码点 Forgot password。
 
 **Q3：git push 提示没权限？**
 → 先跑 `gh auth login` 重新授权。
 
-**Q4：提交前忘了 cd 到仓库？**
-→ 提示 `not a git repository`，先进入仓库文件夹再执行。
+**Q4：提示 not a git repository？**
+→ 先 `cd` 进入仓库文件夹再执行。
 
 ---
 
-## 7. 日常流程总结
+## 8. 每日流程总结
 
 ```
 改文件 → git add . → git commit -m "xx" → git push
 ```
 
-> 小提醒：GitHub 账号是 ZHANGLEI1121，仓库推送前确认在正确的文件夹里。
+## 9. 把笔记存进 Obsidian
+
+把本项目仓库里的 `.md` 文件复制到 Obsidian 库（如 `D:\Vault\Obsidian`）即可；Obsidian 会自动识别显示。
+
+> 小提醒：仓库推送前，确认已在 `E:\我的项目\my-first-repo` 文件夹里。
